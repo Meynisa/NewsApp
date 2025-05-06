@@ -31,7 +31,7 @@ import com.loc.newsapp.presentation.navgraph.Routes
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeScreen(articles: LazyPagingItems<Article>, navigate: (String) -> Unit) {
+fun HomeScreen(articles: LazyPagingItems<Article>, navigateToSearch: () -> Unit, navigateToDetails: (Article) -> Unit) {
     val titles by remember {
         derivedStateOf {
             if (articles.itemCount > 10){
@@ -66,7 +66,7 @@ fun HomeScreen(articles: LazyPagingItems<Article>, navigate: (String) -> Unit) {
             readOnly = true,
             onValueChange = {},
             onClick = {
-                navigate(Routes.SearchScreen.route)
+                navigateToSearch()
             },
             onSearch = {}
         )
@@ -89,7 +89,7 @@ fun HomeScreen(articles: LazyPagingItems<Article>, navigate: (String) -> Unit) {
             modifier = Modifier.padding(horizontal = MediumPadding1),
             articles = articles,
             onClick = {
-                navigate(Routes.DetailScreen.route)
+                navigateToDetails(it)
             }
         )
     }

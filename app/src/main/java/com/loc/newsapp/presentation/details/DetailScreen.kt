@@ -28,7 +28,6 @@ import com.loc.newsapp.domain.model.Source
 import com.loc.newsapp.presentation.Dimens.ArticleImageHeight
 import com.loc.newsapp.presentation.Dimens.MediumPadding1
 import com.loc.newsapp.presentation.details.components.DetailsTopBar
-import com.loc.newsapp.presentation.navgraph.Routes
 import com.loc.newsapp.ui.theme.NewsAppTheme
 
 @Composable
@@ -46,7 +45,7 @@ fun DetailScreen(
             .statusBarsPadding()
     ) {
         DetailsTopBar(
-            onBookmarkClick = { event(DetailEvent.SaveArticle) },
+            onBookmarkClick = { event(DetailEvent.UpsertDeleteArticle(article = article)) },
             onShareClick = {
                 Intent(Intent.ACTION_SEND).also {
                     it.putExtra(Intent.EXTRA_TEXT, article.url)
